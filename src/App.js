@@ -28,7 +28,7 @@ const App = (props) => {
   }, [props.messages]);
   return (
     <div className="App">
-      {props.auth.isAuthenticated ? <Navbar /> : ""}
+      <Navbar />
       <Route
         exact
         path="/"

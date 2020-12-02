@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import Button from "@material-ui/core/Button";
-import ListItemText from "@material-ui/core/ListItemText";
 import CircularProgressOverlay from "../../utils/circular-progress-overlay";
+import { List, Button, Typography, Divider } from "antd";
 
 import { getEmployeeList } from "../../../actions/employee/employeeActions";
 
@@ -15,8 +12,6 @@ const Dashboard = (props) => {
       setData(props.employee.employeeList);
     }
   }, [props.employee.employeeList]);
-
-  const listItems = data.map((d) => <li key={d.originCity}>{d.originCity}</li>);
 
   const getData = () => {
     props.getEmployeeList();
@@ -31,14 +26,18 @@ const Dashboard = (props) => {
     return (
       <div className="my-3">
         <h3>Dashboard</h3>
-        <Button variant="contained" color="primary" onClick={getData}>
+        <Button type="primary" onClick={getData}>
+          {" "}
           Get Data
         </Button>
-        <List component="nav" aria-label="main mailbox folders">
-          <ListItem>
-            <ListItemText primary={listItems} />;
-          </ListItem>
-        </List>
+        <List
+          size="small"
+          header={<div>Header</div>}
+          footer={<div>Footer</div>}
+          bordered
+          dataSource={data}
+          renderItem={(item) => <List.Item>{item.originCity}</List.Item>}
+        />
       </div>
     );
   }
